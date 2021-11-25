@@ -19,11 +19,11 @@ opções presentes:
 
 \begin{itemize}
     \item \textbf{Open} - O primeiro QMenu possui um QAction, um sinal conectado
-    com o visualizador dos objetos (GLWidget). Quando acionado (triggered) realiza
+    com o visualizador dos objetos (QGLWidget). Quando acionado (triggered) realiza
     a ação de abrir o gerenciador de arquivos e abrir um arquivo .off.
     \item \textbf{Screenshot} - O outro QMenu possui um QAction que conecta 
-    ao GLWidget. Quando acionado (triggered) realiza a ação de abrir o gerenciador de arquivos
-    e permite o usuário salvar o frame atual do GLWidget como uma imagem png.
+    ao QGLWidget. Quando acionado (triggered) realiza a ação de abrir o gerenciador de arquivos
+    e permite o usuário salvar o frame atual do QGLWidget como uma imagem png.
 \end{itemize}
 
 \begin{figure}[H]
@@ -49,7 +49,7 @@ os keybinds implementados:
 \subsubsection{Visualizador de Objetos 3D}
 
 O principal componente da aplicação, a janela onde os objetos 3D 
-são exibidos é um GLWidget, em que há grande parte da implementação da 
+são exibidos é um QGLWidget, em que há grande parte da implementação da 
 API do OpenGL.
 
 Esta janela ilustra o resultado final do processamento dos objetos, com texturas e shaders, se necessário.
@@ -98,7 +98,7 @@ ao ser clicado fechará a aplicação.
 A barra de status fica no canto inferior da tela 
 informando usuários de quantos \emph{samples} e \emph{faces} foram carregadas 
 do objeto 3D.
-Esse possui um sinal ligado ao GLWidget, que recebe 
+Esse possui um sinal ligado ao QGLWidget, que recebe 
 uma QString com as informações mencionadas.
 
 \begin{figure}[H]
@@ -121,14 +121,14 @@ uma QString com as informações mencionadas.
 Para armazenar as possíveis, utilizamos um gerenciador 
 de abas (QTabWidget), que armazenará duas abas(QWidget): uma 
 responsável em guardar operações com shaders, e outra 
-para trocar cor do fundo do GLWidget.
+para trocar cor do fundo do QGLWidget.
 -------------------------
 
 \begin{itemize}
     \item \textbf{Shaders} - Possui um QComboBox, que apresenta 
     vários textos com nome dos possíveis shaders do 
     programa. Após selecionar um, será acionado um sinal 
-    que será enviado para o GLWidget pedindo para mudar 
+    que será enviado para o QGLWidget pedindo para mudar 
     para o shader especificado pelo usuário.
     \item \textbf{Misc} - Possui um QPushButton, que acionará a 
     paleta de cor do Qt, permitindo que o usuário escolha 
