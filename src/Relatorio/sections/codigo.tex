@@ -1,4 +1,4 @@
-\subsection{Código}
+\section{Código}
 
 Agora que a comunicação na interface do Qt foi detalhada,
 podemos passar a explicar a comunicação dentro do código em si. Como dito 
@@ -6,13 +6,72 @@ anteriormente, o maior componente dentro do projeto que possui a grande porção
 do código é o QGLWidget. Ademais, temos a \emph{main.cpp}, que inicia a aplicação e 
 inclusive inicia a \emph{mainwindow.cpp}, que é a janela principal, onde está o QGLWidget.
 
-\subsubsection{glwidget.cpp}
+\subsection{glwidget.cpp}
 
-Este é o código referente a tela do QGLWidget, encapsulando fazer todas as operações 
-referentes ao OpenGL, além de carregar os arquivos.
+Este é o código referente a tela do QGLWidget, encapsulando todas as operações 
+referentes ao OpenGL, além de tratar operações recebidas do usuário na interface. 
+O glwidget é o arquivo mais importante, pois além de ser responsável em comunicar 
+com a API gráfica usada, todas as outras classes são orquestradas a partir dessa: 
+a \emph{camera.cpp} a \emph{light.cpp}, o \emph{material.cpp} e o \emph{trackball.cpp}.
+
+Neste momento não seria intuitivo falar sobre todas as funções, pois além de estarem comentadas, 
+entraremos em mais detalhes sobre o funcionamento das principais funções, quando falarmos 
+sobre os modelos matemáticos. Então, agora iremos completar a discussão sobre a interação do 
+Qt, discorrendo como o código faz o tratamento dos pedidos do usuário
+
+\subsubsection{Nova cor para o fundo do QGLWidget}
+
+Quando o usuário pressiona para escolher uma nova cor para o plano de fundo do visualizador, 
+a função \emph{chooseBackgroundColor()} é chamada. Ela é responsável em abrir o \emph{QColorDialog},
+um Widget já implementado dentro da framework, que possui a função \emph{getColor} permitindo chamar 
+a paleta de cores para que o usuário faça uma escolha. Logo após isso, o programa apenas valida a cor 
+e se for válida, ela será definida como a nova cor de fundo.
+
+\subsubsection{Gerenciamento de arquivos}
+
+Ao pedir para abrir um novo arquivo, a função \emph{showFileOpenDialog()} é chamada para fazer essa tarefa.
+Esta função pode ser divida em duas partes: a primeira é abrir o gerenciador de arquivos, usando o 
+QFileDialog, para deixar o usuário escolher um objeto. Caso um objeto válido tenha sido escolhido, 
+o programa então agora irá ler e processar o arquivo para gerar o objeto na tela.
+
+Essa lógica é aplicada da mesma maneira, quando salvando uma imagem do frame atual do OpenGL usando a 
+função \emph{takeScreenshot}. Nesta função, o QFileDialog também é chamado, porém, em vez de abrir um 
+arquivo, ele salva no diretório escolhido pelo usuário.
+
+\subsubsection{Escolhendo shader}
+
+Existe duas maneiras que o usuário pode escolher os shaders dentro da interface, a primeira é usando 
+os keybinds no teclado número. Apertando qualquer um dos números de um (1) a quatro (4), faz com que o 
+OpenGL atualize os shaders, atráves da função \emph{keyPressEvent ( QKeyEvent * event )}. Entretanto, 
+o usuário também pode atualizar os shaders, usando a QComboBox mencionada na seção sobre a Aba de edição.
+Neste caso, a função que será chamada é a \emph{changeShader(const QString shaderName)}, que irá trocar 
+o shader, de acordo com o nome enviado para ela.
+
+\subsubsection{Movimento do mouse}
+
+Além de fazer leitura do teclado, o programa também faz leitura do mouse, mais especificamente, ele 
+reconhece entradas no botão esquerdo da mouse(quando o objeto quer ser rotacionado), e também o scroll do mouse, 
+quando o usuário quer fazer uma operação de ampliação. As funções responsáveis a interagir com as entradas do mouse
+são: \emph{GLWidget :: mouseMoveEvent ( QMouseEvent * event )}, \emph{void GLWidget :: mousePressEvent ( QMouseEvent * event )},
+\emph{void GLWidget :: mouseReleaseEvent ( QMouseEvent * event )},\emph{void GLWidget :: wheelEvent ( QWheelEvent * event )}
 
 
+\subsection{light.cpp}
 
+Classe para gerenciar as luzes dentro do programa, o glwidget.cpp possui uma 
+instância do objeto, que será usada durante o processo de "desenhar" a tela\emph{paintGL()}, para 
+calcular a iluminação.
 
+\subsection{material.cpp}
+
+Usado em junção com o light.cpp, o Material é uma classe para descrever 
+as propriedades de um objeto quando for refletido pela luz. Assim como a luz, 
+todos esses cálculos são feitos na hora de chamar a função\emph{paintGL()}
+
+\subsection{camera.cpp e trackball.cpp}
+
+Por fim, para realizar as operações de rotação e ampliação, todos 
+os cálculos são feitos em cima das classes Camera e Trackball. Essas classes 
+também são chamadas, quando o OpenGL faz um resize da tela.
 
 
