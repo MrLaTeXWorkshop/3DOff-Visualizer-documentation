@@ -1,1 +1,44 @@
-\section{Detalhando módelos matemáticos}
+\section{Módelos matemáticos}
+
+\subsection{Operações geométricas}
+
+Operação de rotação em um ponto fixo:
+
+\[ 
+    R(0) = R_z(0_z)*R_y(0_y)*R_x(0_x)
+\]
+
+\subsection{Shaders}
+
+\subsubsection{Geração de tangentes}
+
+\[
+\begin{bmatrix}
+    T_{x} & B_{x} & N_{x} \\
+    T_{y} & B_{y} & N_{y} \\
+    T_{z}       & B_{z} & N_{z} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+    T_{x} & T_{y} & T_{z} \\
+    B_{x} & B_{y} & B_{z} \\
+    N_{x} & N_{y} & N_{z} 
+\end{bmatrix}
+\]
+
+\subsubsection{Phong:}
+
+\[ 
+    I_p = k_a i_a + \sum_{m \in lights} (k_d(\hat{L}_m * \hat{N}) i_{m,d} + k_s(\hat{R}_m * \hat{V})^{\alpha} i_{m,s}
+\] 
+
+\subsubsection{Gouraud:}
+\[ 
+    Fn = \frac{f_1 + f_2 + ... f_n}{|f_1 + f_2 + ... f_n|}
+\] 
+
+\subsubsection{Combinação linear: Specular, Ambient e Diffuse}
+
+\[
+I = I_a K_a + I_i [K_d(L*N) + K_s (R*V)^n ]
+\]

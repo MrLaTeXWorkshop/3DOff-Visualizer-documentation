@@ -47,7 +47,11 @@ o usuário também pode atualizar os shaders usando a QComboBox mencionada na se
 Neste caso, a função que será chamada é a \emph{changeShader(const QString shaderName)}, que irá trocar 
 o shader de acordo com o nome enviado para ela.
 
-\subsubsection{Movimento do mouse}
+\subsubsection{Entrada do usuário}
+
+A primeira função é o \emph{ keyPressEvent ( QKeyEvent * event )}. Como o GLWidget foi 
+programado para ter uma \emph{focusPolicy} forte, então todos os eventos do teclado são capturados 
+pela função mencionada, e então tratados para fazer os keybinds já mencionados.
 
 Além de fazer leitura do teclado, o programa também faz leitura do mouse, ele 
 reconhece entradas no botão esquerdo do mouse (quando o objeto quer ser rotacionado) e também o scroll do mouse 
@@ -74,4 +78,4 @@ Por fim, para rotacionar e ampliar o objeto 3D, todos
 os cálculos são feitos em cima das classes Camera e Trackball. Essas classes 
 também são chamadas quando o OpenGL altera o tamanho da janela da aplicação.
 
-
+\newpage
