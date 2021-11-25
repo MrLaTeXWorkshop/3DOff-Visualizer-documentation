@@ -117,12 +117,11 @@ uma QString com as informações mencionadas.
     \caption{As duas abas de edição}
 \end{figure}
 
--------------------------
-Para armazenar as possíveis, utilizamos um gerenciador 
-de abas (QTabWidget), que armazenará duas abas(QWidget): uma 
-responsável em guardar operações com shaders, e outra 
-para trocar cor do fundo do QGLWidget.
--------------------------
+Nessas abas, o usuário pode escolher entre qual dos shader será aplicado no objeto 3D
+e qual a cor do fundo atrás do objeto. Na primeira, ao selecionarmos um algoritmo
+o objeto que tiver sido selecionado anteriormente, será redesenhado na tela com o novo
+algoritmo. No segundo, a cor escolhida será aplicada no fundo da imagem, não modificando
+o objeto que está sendo exibido (esses algoritmos não levam em conta a cor do ambiente). 
 
 \begin{itemize}
     \item \textbf{Shaders} - Possui um QComboBox, que apresenta 
