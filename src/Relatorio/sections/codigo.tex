@@ -2,6 +2,17 @@
 
 Agora que a comunicação na interface do Qt foi detalhada,
 podemos passar a explicar a comunicação dentro do código em si. Como dito 
-anteriormente, o único componente dentro do projeto que possui qualquer 
-integração com código é o GLWidget, fora ele, também usamos código para 
-programar outras funcionalidades que já fazem parte do OpenGL, como a Camera.
+anteriormente, o maior componente dentro do projeto que possui a grande porção
+do código é o QGLWidget. Ademais, temos a \emph{main.cpp}, que inicia a aplicação e 
+inclusive inicia a \emph{mainwindow.cpp}, que é a janela principal, onde está o QGLWidget.
+
+\subsubsection{glwidget.cpp}
+
+Este é o código referente a tela do QGLWidget, encapsulando fazer todas as operações 
+referentes ao OpenGL, além de carregar os arquivos.
+
+
+
+
+
+
